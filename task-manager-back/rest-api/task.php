@@ -36,16 +36,12 @@ class Task
         $task_priority = $data['task_priority'];
         $task_created = $data['task_created'];
         $task_updated = $data['task_updated'];
-        $query = "INSERT INTO task (task_title, task_desc, task_dept, task_due, task_status, task_priority, task_created, task_updated)
+        $query = "INSERT INTO task (title, 'description', department, due_date, 'status', priority, created_at, updated_at)
         VALUES ('$task_title', '$task_desc', '$task_dept', '$task_due', '$task_status', '$task_priority', '$task_created', '$task_updated')";
 
         $result = mysqli_query($this->conn, $query);
 
-        if ($result) {
-            return true;
-        } else {
-            return false;
-        }
+        return $result ? true : false;
     }
     public function updateTask($id, $data)
     {

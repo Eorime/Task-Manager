@@ -1,6 +1,7 @@
 <?php
 require_once "config.php";
 require_once "task.php";
+require_once "employee.php";
 //instance of the task class
 $taskObject = new Task($connection);
 //get request method

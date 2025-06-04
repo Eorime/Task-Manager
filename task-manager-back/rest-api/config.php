@@ -13,4 +13,3 @@ if (!$connection) {
 if ($connection) {
     echo "maladec";
 }
-
