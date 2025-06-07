@@ -2,8 +2,9 @@
 require_once "config.php";
 require_once "task.php";
 require_once "employee.php";
-//instance of the task class
+//instance the classes
 $taskObject = new Task($connection);
+$employeeObject = new Employee($connection);
 //get request method
 $method = $_SERVER["REQUEST_METHOD"];
 //get the requested endpoint
@@ -18,6 +19,10 @@ switch ($method) {
             $tasks = $taskObject->getAllTasks();
             echo json_encode(['tasks' => $tasks, 'message' => 'salam salam']);
         }
+        if ($endpoint === "/employees") {
+            $employees = $employeeObject->getAllEmployees();
+            echo json_encode(['employees' => $employees, 'message' => 'hewwooo']);
+        }
         break;
     case "POST":
         if ($endpoint === "/tasks") {
@@ -25,9 +30,13 @@ switch ($method) {
             $data = json_decode(file_get_contents("php://input"), true);
             echo json_encode(["success" => $result]);
         }
+        if ($endpoint === "/employees") {
+            $data = json_decode(file_get_contents("php://input"), true);
+            echo json_encode(['success' => $result]);
+        }
         break;
     case "PUT":
-        if (preg_match("/^\/employees\/(\d+)$/", $endpoint, $matches)) {
+        if (preg_match("/^\/tasks\/(\d+)$/", $endpoint, $matches)) {
             //update employee by id
             $taskId = $matches[1];
             $data = json_decode(file_get_contents("php://inputs"), true);
@@ -36,10 +45,15 @@ switch ($method) {
         }
         break;
     case "DELETE":
-        if (preg_match("/^\/employees\/(\d+)$/", $endpoint, $matches)) {
+        if (preg_match("/^\/tasks\/(\d+)$/", $endpoint, $matches)) {
             //delete employee by id 
             $taskId = $matches[1];
             $result = $taskObject->deleteTask($taskId);
+            echo json_encode(['success' => $result]);
+        }
+        if (preg_match("/^\/employees\/(\d+)$/", $endpoint, $matches)) {
+            $employeeId = $matches[1];
+            $result = $employeeObject->deleteEmployee(($employeeId));
             echo json_encode(['success' => $result]);
         }
         break;
