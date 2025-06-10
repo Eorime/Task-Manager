@@ -11,7 +11,7 @@ $method = $_SERVER["REQUEST_METHOD"];
 $endpoint = $_SERVER["PATH_INFO"];
 //set content type of the request
 header("Content-type: application/json");
-//process the request
+//process the request 
 switch ($method) {
     case "GET":
         if ($endpoint === "/tasks") {
