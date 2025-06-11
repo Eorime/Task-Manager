@@ -1,11 +1,12 @@
 <?php
 function sendRequest($url, $method = "GET", $data = [])
 {
+    //initialize curl session
     $ch = curl_init();
     curl_setopt($ch, CURLOPT_URL, $url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-    // <!-- set request method -->
+    // set request method
     switch ($method) {
         case "GET":
             curl_setopt($ch, CURLOPT_HTTPGET, true);
