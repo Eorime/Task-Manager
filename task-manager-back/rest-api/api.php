@@ -28,11 +28,11 @@ switch ($method) {
         if ($endpoint === "/tasks") {
             //add a new task
             $data = json_decode(file_get_contents("php://input"), true);
-            echo json_encode(["success" => $result]);
+            echo json_encode(["success" => $data]);
         }
         if ($endpoint === "/employees") {
             $data = json_decode(file_get_contents("php://input"), true);
-            echo json_encode(['success' => $result]);
+            echo json_encode(['success' => $data]);
         }
         break;
     case "PUT":
