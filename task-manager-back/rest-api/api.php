@@ -18,8 +18,11 @@ switch ($method) {
             //get all tasks
             $tasks = $taskObject->getAllTasks();
             echo json_encode(['tasks' => $tasks, 'message' => 'salam salam']);
-        }
-        if ($endpoint === "/employees") {
+        } elseif (preg_match('/^\/tasks\/(\d+)$/', $endpoint, $matches)) {
+            $taskId = $matches[1];
+            $task = $taskObject->getTaskById($taskId);
+            echo json_encode(['erti taski var' => $task, "id" => $taskId]);
+        } elseif ($endpoint === "/employees") {
             $employees = $employeeObject->getAllEmployees();
             echo json_encode(['employees' => $employees, 'message' => 'hewwooo']);
         }
@@ -39,7 +42,7 @@ switch ($method) {
         if (preg_match("/^\/tasks\/(\d+)$/", $endpoint, $matches)) {
             //update employee by id
             $taskId = $matches[1];
-            $data = json_decode(file_get_contents("php://inputs"), true);
+            $data = json_decode(file_get_contents("php://input"), true);
             $result = $taskObject->updateTask($taskId, $data);
             echo json_encode(['success' => $result]);
         }

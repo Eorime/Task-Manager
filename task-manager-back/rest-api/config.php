@@ -11,5 +11,5 @@ if (!$connection) {
 }
 
 if ($connection) {
-    echo "maladec";
+    echo "maladec, connected";
 }
