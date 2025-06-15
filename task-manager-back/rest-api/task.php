@@ -33,7 +33,7 @@ class Task
     public function addTask($data)
     {
         $task_title = $data['task_title'];
-        $task_desc = $data['task_desc'];
+        $task_desc = $data['task_description'];
         $assigned_to = $data['assigned_to'] ?? null;
         $task_dept = $data['task_dept'];
         $task_due = $data['task_due'];
@@ -53,8 +53,7 @@ class Task
     public function updateTask($id, $data)
     {
         $task_title = $data['task_title'];
-        $task_desc = $data['task_desc'];
-        $assigned_to = $data['assigned_to'] ?? null;
+        $task_desc = $data['task_description'];
         $task_dept = $data['task_dept'];
         $task_due = $data['task_due'];
         $task_status = $data['task_status'];

@@ -31,8 +31,10 @@ switch ($method) {
         if ($endpoint === "/tasks") {
             //add a new task
             $data = json_decode(file_get_contents("php://input"), true);
-            echo json_encode(["success" => $data]);
+            $result = $taskObject->addTask($data);
+            echo json_encode(["success" => $result]);
         }
+        break;
         if ($endpoint === "/employees") {
             $data = json_decode(file_get_contents("php://input"), true);
             echo json_encode(['success' => $data]);
