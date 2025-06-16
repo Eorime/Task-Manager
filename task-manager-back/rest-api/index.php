@@ -8,8 +8,8 @@ try {
     $tasks = json_decode($tasks, true);
     //task by id
     $taskId = 1;
-    $tasks = sendRequest($restAPIBaseUrl . "/api.php/tasks/$taskId", "GET");
-    $tasks = json_decode($tasks, true);
+    $task = sendRequest($restAPIBaseUrl . "/api.php/tasks/$taskId", "GET");
+    $task = json_decode($task, true);
     //add new task
     $data = [
         'task_title' => 'task_title',
@@ -39,4 +39,16 @@ try {
     $result = sendRequest($restAPIBaseUrl . "/api.php/tasks/$taskId", "PUT", $data);
 } catch (Exception $e) {
     echo $e;
+}
+
+try {
+    //all employees 
+    $employees = sendRequest($restAPIBaseUrl . "/api.php/employees", 'GET');
+    $employees = json_decode($employees, true);
+    //employee by id 
+    $employeeId = 1;
+    $employee = sendRequest($restAPIBaseUrl . "/api.php/employees/$employeeId", "GET");
+    $employee = json_decode($employee, true);
+    //add new employee 
+    $data = "";
 }

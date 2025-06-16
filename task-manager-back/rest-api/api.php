@@ -17,14 +17,18 @@ switch ($method) {
         if ($endpoint === "/tasks") {
             //get all tasks
             $tasks = $taskObject->getAllTasks();
-            echo json_encode(['tasks' => $tasks, 'message' => 'salam salam']);
+            echo json_encode([$tasks ? ['tasks' => $tasks] : "No tasks", 'message' => 'salam salam']);
         } elseif (preg_match('/^\/tasks\/(\d+)$/', $endpoint, $matches)) {
             $taskId = $matches[1];
             $task = $taskObject->getTaskById($taskId);
-            echo json_encode(['erti taski var' => $task, "id" => $taskId]);
+            echo json_encode([$task ? ['erti taski var' => $task] : "No tasks w this id", "id" => $taskId]);
         } elseif ($endpoint === "/employees") {
             $employees = $employeeObject->getAllEmployees();
-            echo json_encode(['employees' => $employees, 'message' => 'hewwooo']);
+            echo json_encode([$employees ? ['employees' => $employees] : "No employees", 'message' => 'hewwooo']);
+        } elseif (preg_match('/^\/employees\/(\d+)$/', $endpoint, $matches)) {
+            $employeeId = $matches[1];
+            $employee = $employeeObject->getEmployeeById($employeeId);
+            echo json_encode([$employee ? ['employee' => $employee] : "No employee w this id"]);
         }
         break;
     case "POST":
@@ -33,11 +37,10 @@ switch ($method) {
             $data = json_decode(file_get_contents("php://input"), true);
             $result = $taskObject->addTask($data);
             echo json_encode(["success" => $result]);
-        }
-        break;
-        if ($endpoint === "/employees") {
+        } elseif ($endpoint === "/employees") {
             $data = json_decode(file_get_contents("php://input"), true);
-            echo json_encode(['success' => $data]);
+            $result = $employeeObject->addEmployee($data);
+            echo json_encode(['success' => $result]);
         }
         break;
     case "PUT":
