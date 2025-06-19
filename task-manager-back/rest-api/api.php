@@ -2,6 +2,8 @@
 require_once "config.php";
 require_once "task.php";
 require_once "employee.php";
+require_once "priority";
+
 //instance the classes
 $taskObject = new Task($connection);
 $employeeObject = new Employee($connection);
