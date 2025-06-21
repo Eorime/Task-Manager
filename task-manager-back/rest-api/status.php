@@ -1,7 +1,8 @@
 <?php
 class Status
 {
-    private function __construct($conn)
+    private $conn;
+    public function __construct($conn)
     {
         $this->conn = $conn;
     }
