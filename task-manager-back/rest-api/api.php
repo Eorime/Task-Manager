@@ -86,3 +86,72 @@ switch ($method) {
         }
         break;
 }
+
+function authenticate()
+{
+    $headers = getallheaders();
+    $token = $headers["Authorization"] ?? $_POST['token'] ?? $_GET['token'] ?? null;
+
+    if (!$token) {
+        http_response_code(401);
+        echo json_encode(['error' => "Authentication required"]);
+    }
+
+    $user = validateToken($token);
+    if (!$user) {
+        http_response_code(401);
+        echo json_encode(['error' => "Invalid credentials"]);
+        exit;
+    }
+    return $user;
+}
+
+$protected_routes = [
+    'POST' => ['tasks'],
+    'PUT' => ['tasks'],
+    'DELETE' => ['tasks']
+];
+
+if (isset($protected_routes[$method]) && in_array($endpoint, $protected_routes[$method])) {
+    $current_user = authenticate();
+}
+
+$task = new Task($connection);
+
+switch ($method) {
+    case 'GET':
+        if ($endpoint === 'tasks') {
+            if (isset($_GET['id'])) {
+                // Get specific task (no authentication required)
+                $result = $task->getTaskById($_GET['id']);
+            } else {
+                // Get all tasks (no authentication required)
+                $result = $task->getAllTasks();
+            }
+        }
+        break;
+
+    case 'POST':
+        if ($endpoint === 'tasks') {
+            // Authentication required - $current_user is set
+            $result = $task->addTask($_POST, $current_user['id']);
+        }
+        break;
+
+    case 'PUT':
+        if ($endpoint === 'tasks' && isset($_GET['id'])) {
+            // Authentication required - $current_user is set
+            parse_str(file_get_contents("php://input"), $put_data);
+            $result = $task->updateTask($_GET['id'], $put_data, $current_user['id']);
+        }
+        break;
+
+    case 'DELETE':
+        if ($endpoint === 'tasks' && isset($_GET['id'])) {
+            // Authentication required - $current_user is set
+            $result = $task->deleteTask($_GET['id'], $current_user['id']);
+        }
+        break;
+}
+
+echo json_encode($result);

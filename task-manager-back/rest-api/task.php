@@ -8,6 +8,19 @@ class Task
         $this->conn = $conn;
     }
 
+    // check if user can access task
+    public function canAccess($employee_id, $task_id)
+    {
+        $query = "SELECT assigned_to FROM task WHERE id = ?";
+        $stmt = mysqli_prepare($this->conn, $query);
+        mysqli_stmt_bind_param($stmt, "i", $task_id);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $task = mysqli_fetch_assoc($result);
+
+        return $task && $task['assigned_to'] == $employee_id;
+    }
+
     public function getAllTasks()
     {
         $query = "SELECT * FROM task";
@@ -30,28 +43,33 @@ class Task
         return $task;
     }
 
-    public function addTask($data)
+    public function addTask($data, $employee_id)
     {
         $task_title = $data['task_title'];
         $task_desc = $data['task_description'];
-        $assigned_to = $data['assigned_to'] ?? null;
+        $assigned_to = $employee_id;
         $task_dept = $data['task_dept'];
         $task_due = $data['task_due'];
-        $task_status = $data['task_status'];
-        $task_priority = $data['task_priority'];
+        $task_status = $data['task_status'] ?? 1;
+        $task_priority = $data['task_priority'] ?? 2;
 
         $query = "INSERT INTO task (title, description, assigned_to, department, due_date, status, priority, created_at, updated_at)
         VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())";
 
         $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "ssissss", $task_title, $task_desc, $assigned_to, $task_dept, $task_due, $task_status, $task_priority);
+        mysqli_stmt_bind_param($stmt, "ssiisii", $task_title, $task_desc, $assigned_to, $task_dept, $task_due, $task_status, $task_priority);
         $result = mysqli_stmt_execute($stmt);
 
         return $result ? true : false;
     }
 
-    public function updateTask($id, $data)
+    public function updateTask($id, $data, $employee_id)
     {
+
+        if (!$this->canAccess($employee_id, $id)) {
+            return ['error' => 'Access denied'];
+        }
+
         $task_title = $data['task_title'];
         $task_desc = $data['task_description'];
         $task_dept = $data['task_dept'];
@@ -71,14 +89,18 @@ class Task
         WHERE id = ?";
 
         $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "ssissssi", $task_title, $task_desc, $assigned_to, $task_dept, $task_due, $task_status, $task_priority, $id);
+        mysqli_stmt_bind_param($stmt, "ssiisiii", $task_title, $task_desc, $task_dept, $task_due, $task_status, $task_priority, $id, $employee_id);
         $result = mysqli_stmt_execute($stmt);
 
         return $result ? true : false;
     }
 
-    public function deleteTask($id)
+    public function deleteTask($id, $employee_id)
     {
+        if (!$this->canAccess($employee_id, $id)) {
+            return ['error' => 'Access denied'];
+        }
+
         $query = "DELETE FROM task WHERE id = ?";
         $stmt = mysqli_prepare($this->conn, $query);
         mysqli_stmt_bind_param($stmt, "i", $id);
