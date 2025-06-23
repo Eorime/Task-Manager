@@ -87,4 +87,3 @@ function revokeToken($employee_id)
         return false;
     }
 }
-?>
