@@ -20,7 +20,6 @@ $endpoint = $_SERVER["PATH_INFO"];
 //set content type of the request
 header("Content-type: application/json");
 
-// Authentication function
 function authenticate()
 {
     $headers = getallheaders();
@@ -31,6 +30,9 @@ function authenticate()
         echo json_encode(['error' => "Authentication required"]);
         exit;
     }
+
+    $token = str_replace('Bearer ', '', $token);
+    $token = trim($token);
 
     $user = validateToken($token);
     if (!$user) {
@@ -92,6 +94,30 @@ switch ($method) {
         break;
 
     case "POST":
+        //auth
+        if ($endpoint === "/login") {
+            $data = json_decode(file_get_contents("php://input"), true);
+            $email = $data['email'];
+            $password = $data['password'];
+
+            $user = $employeeObject->login($email, $password);
+            if ($user) {
+                $token = generateToken($user); // Uses function from config.php
+                echo json_encode(['success' => true, 'token' => $token, 'user' => $user]);
+            } else {
+                echo json_encode(['success' => false, 'error' => 'Invalid credentials']);
+            }
+        } elseif ($endpoint === "/signup") {
+            $data = json_decode(file_get_contents("php://input"), true);
+            if ($data === null) {
+                http_response_code(400);
+                echo json_encode(['success' => false, 'error' => 'Invalid JSON format']);
+                break;
+            }
+
+            $result = $employeeObject->addEmployee($data);
+            echo json_encode(['success' => $result]);
+        }
         //task addition
         if ($endpoint === "/tasks") {
             //add a new task
