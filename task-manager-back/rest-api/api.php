@@ -20,6 +20,7 @@ $endpoint = $_SERVER["PATH_INFO"];
 //set content type of the request
 header("Content-type: application/json");
 
+// Authentication function
 function authenticate()
 {
     $headers = getallheaders();
@@ -97,18 +98,33 @@ switch ($method) {
         //auth
         if ($endpoint === "/login") {
             $data = json_decode(file_get_contents("php://input"), true);
+
+            if ($data === null) {
+                http_response_code(400);
+                echo json_encode(['success' => false, 'error' => 'Invalid JSON format']);
+                break;
+            }
+
+            if (!isset($data['email']) || !isset($data['password'])) {
+                http_response_code(400);
+                echo json_encode(['success' => false, 'error' => 'Email and password are required']);
+                break;
+            }
+
             $email = $data['email'];
             $password = $data['password'];
 
             $user = $employeeObject->login($email, $password);
             if ($user) {
-                $token = generateToken($user); // Uses function from config.php
+                $token = generateToken($user['id']);
                 echo json_encode(['success' => true, 'token' => $token, 'user' => $user]);
             } else {
+                http_response_code(401);
                 echo json_encode(['success' => false, 'error' => 'Invalid credentials']);
             }
         } elseif ($endpoint === "/signup") {
             $data = json_decode(file_get_contents("php://input"), true);
+
             if ($data === null) {
                 http_response_code(400);
                 echo json_encode(['success' => false, 'error' => 'Invalid JSON format']);
@@ -117,17 +133,30 @@ switch ($method) {
 
             $result = $employeeObject->addEmployee($data);
             echo json_encode(['success' => $result]);
-        }
-        //task addition
-        if ($endpoint === "/tasks") {
+            //task addition
+        } elseif ($endpoint === "/tasks") {
             //add a new task
             $data = json_decode(file_get_contents("php://input"), true);
+
+            if ($data === null) {
+                http_response_code(400);
+                echo json_encode(['success' => false, 'error' => 'Invalid JSON format']);
+                break;
+            }
+
             $result = $taskObject->addTask($data, $current_user['id']);
             echo json_encode(["success" => $result]);
 
             //employee addition
         } elseif ($endpoint === "/employees") {
             $data = json_decode(file_get_contents("php://input"), true);
+
+            if ($data === null) {
+                http_response_code(400);
+                echo json_encode(['success' => false, 'error' => 'Invalid JSON format']);
+                break;
+            }
+
             $result = $employeeObject->addEmployee($data);
             echo json_encode(['success' => $result]);
         }
@@ -138,6 +167,14 @@ switch ($method) {
             //update task by id
             $taskId = $matches[1];
             $data = json_decode(file_get_contents("php://input"), true);
+
+            // check if json was parsed successfully
+            if ($data === null) {
+                http_response_code(400);
+                echo json_encode(['success' => false, 'error' => 'Invalid JSON format']);
+                break;
+            }
+
             $result = $taskObject->updateTask($taskId, $data, $current_user['id']);
             echo json_encode(['success' => $result]);
         }
