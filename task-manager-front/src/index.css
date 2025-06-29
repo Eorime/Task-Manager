@@ -12,4 +12,6 @@ html {
 body {
 	background-color: #ecf2f9;
 	font-family: "Firago";
+	padding: 0;
+	margin: 0;
 }
