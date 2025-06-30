@@ -6,9 +6,8 @@ export const Container = styled.div`
 	background-color: #ffffff;
 	display: flex;
 	align-items: center;
-	padding: 1.5rem;
+	padding: 1rem;
 `;
-
 export const StyledLink = styled(Link)`
 	color: inherit;
 	text-decoration: none;
@@ -21,4 +20,35 @@ export const NavText = styled.span`
 	&: hover {
 		color: #000;
 	}
+`;
+
+export const UserContainer = styled.div`
+	display: flex;
+	gap: 0.5rem;
+`;
+
+export const UserImageWrapper = styled.div`
+	background-color: #d16464;
+	border-radius: 100%;
+	width: 2.3rem;
+	height: 2.3rem;
+`;
+
+export const UserImage = styled.img``;
+
+export const UserCredentialsContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding-bottom: 0.2rem;
+`;
+
+export const UserCredentialsText = styled.span`
+	color: #434951;
+	font-size: 14px;
+`;
+
+export const UserCredentialsMail = styled.span`
+	color: #434951;
+	font-size: 11px;
 `;
