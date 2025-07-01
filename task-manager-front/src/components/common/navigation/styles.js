@@ -7,17 +7,24 @@ export const Container = styled.div`
 	display: flex;
 	align-items: center;
 	padding: 1rem;
+	justify-content: space-between;
+	box-sizing: border-box;
 `;
 export const StyledLink = styled(Link)`
 	color: inherit;
 	text-decoration: none;
 `;
 
+export const NavASide = styled.div`
+	display: flex;
+	align-items: center;
+`;
+
 export const NavText = styled.span`
 	color: #434951;
 	transition: color 0.3s ease-in-out;
 
-	&: hover {
+	&:hover {
 		color: #000;
 	}
 `;

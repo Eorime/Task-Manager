@@ -1,6 +1,7 @@
 import React from "react";
 import {
 	Container,
+	NavASide,
 	NavText,
 	StyledLink,
 	UserContainer,
@@ -14,17 +15,23 @@ import {
 const Navigation = () => {
 	return (
 		<Container>
-			<UserContainer>
-				<UserImageWrapper>
-					<UserImage />
-				</UserImageWrapper>
-				<UserCredentialsContainer>
-					<UserCredentialsText>Your Name</UserCredentialsText>
-					<UserCredentialsMail>yourmail@gmail.com</UserCredentialsMail>
-				</UserCredentialsContainer>
-			</UserContainer>
+			<NavASide>
+				<UserContainer>
+					<UserImageWrapper>
+						<UserImage />
+					</UserImageWrapper>
+					<UserCredentialsContainer>
+						<UserCredentialsText>Your Name</UserCredentialsText>
+						<UserCredentialsMail>yourmail@gmail.com</UserCredentialsMail>
+					</UserCredentialsContainer>
+				</UserContainer>
+				<StyledLink>
+					<NavText>All Tasks</NavText>
+				</StyledLink>
+			</NavASide>
+			{/* //not loggedin? login, else log out */}
 			<StyledLink>
-				<NavText>All Tasks</NavText>
+				<NavText>Log In</NavText>
 			</StyledLink>
 		</Container>
 	);
