@@ -18,6 +18,7 @@ export const StyledLink = styled(Link)`
 export const NavASide = styled.div`
 	display: flex;
 	align-items: center;
+	gap: 6rem;
 `;
 
 export const NavText = styled.span`

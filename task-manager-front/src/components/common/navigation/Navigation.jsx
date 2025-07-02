@@ -28,6 +28,9 @@ const Navigation = () => {
 				<StyledLink>
 					<NavText>All Tasks</NavText>
 				</StyledLink>
+				<StyledLink>
+					<NavText>Team Overview</NavText>
+				</StyledLink>
 			</NavASide>
 			{/* //not loggedin? login, else log out */}
 			<StyledLink>
