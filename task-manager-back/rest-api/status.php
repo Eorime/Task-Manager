@@ -22,10 +22,11 @@ class Status
     {
         $query = "SELECT * FROM status WHERE id = ?";
         $stmt = mysqli_prepare($this->conn, $query);
-        mysqli_stmt_bind_param($stmt, "id", $id);
+        mysqli_stmt_bind_param($stmt, "id",  $id);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
         $status = mysqli_fetch_assoc($result);
         return $status;
     }
 }
+

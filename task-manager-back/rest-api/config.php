@@ -77,7 +77,6 @@ function validateCredentials($email, $password)
             error_log("Credential validation prepare error: " . mysqli_error($connection));
             return false;
         }
-
         mysqli_stmt_bind_param($stmt, "s", $email);
         mysqli_stmt_execute($stmt);
         $result = mysqli_stmt_get_result($stmt);
