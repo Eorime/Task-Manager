@@ -6,10 +6,11 @@ export const Container = styled.div`
 	background-color: #ffffff;
 	display: flex;
 	align-items: center;
-	padding: 1rem;
+	padding: 1rem 1.8rem 1rem 1.8rem;
 	justify-content: space-between;
 	box-sizing: border-box;
 `;
+
 export const StyledLink = styled(Link)`
 	color: inherit;
 	text-decoration: none;

@@ -25,10 +25,10 @@ const Navigation = () => {
 						<UserCredentialsMail>yourmail@gmail.com</UserCredentialsMail>
 					</UserCredentialsContainer>
 				</UserContainer>
-				<StyledLink>
+				<StyledLink to="/">
 					<NavText>All Tasks</NavText>
 				</StyledLink>
-				<StyledLink>
+				<StyledLink to="/employees">
 					<NavText>Team Overview</NavText>
 				</StyledLink>
 			</NavASide>
