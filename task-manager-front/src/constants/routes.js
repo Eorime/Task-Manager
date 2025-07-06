@@ -1,5 +1,5 @@
 const home = "/";
-const task = "/task/:id";
+const taskDetails = "/task/:id";
 const createTask = "/createTask";
 const employees = "/employees";
 const departments = "/departments";
@@ -8,7 +8,7 @@ const logIn = "/login";
 
 export const routes = {
 	home,
-	task,
+	taskDetails,
 	createTask,
 	employees,
 	departments,
