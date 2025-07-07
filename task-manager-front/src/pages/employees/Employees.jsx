@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "./style";
+import { Container } from "./styles";
 import Navigation from "../../components/common/navigation/Navigation";
 
 const Employees = () => {

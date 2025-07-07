@@ -10,10 +10,6 @@ if (!$connection) {
     die("maladec, connection failed: " . mysqli_connect_error());
 }
 
-if ($connection) {
-    echo "maladec, connected";
-}
-
 $connection->set_charset("utf8");
 
 function validateToken($token)
