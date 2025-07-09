@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container } from "./styles";
 
 const CreateTask = () => {
@@ -12,6 +12,14 @@ const CreateTask = () => {
 		priority: "",
 	});
 
+	useEffect(() => {
+		fetch("/rest-api/api.php/task", {
+			method: "POST",
+			body: JSON.stringify(taskData),
+		});
+	}, []);
+
+	// aq forma gaakete, also header daschirdeba didi albatobit mxolod iq, sadac authentications itxovs
 	return <Container>CreateTask</Container>;
 };
 
