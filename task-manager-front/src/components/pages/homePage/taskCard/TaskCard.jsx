@@ -1,7 +1,8 @@
 import React from "react";
+import { Container } from "./styles";
 
-const TaskCard = () => {
-	return <div>TaskCard</div>;
+const TaskCard = ({ taskData }) => {
+	return <Container>{taskData.title}</Container>;
 };
 
 export default TaskCard;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Navigation from "../../components/common/navigation/Navigation";
 import { Container } from "./styles";
+import TaskCard from "../../components/pages/homePage/taskCard/TaskCard";
 
 const Home = () => {
 	const [data, setData] = useState();
@@ -18,7 +19,12 @@ const Home = () => {
 	return (
 		<Container>
 			<Navigation />
-			{data && data.map((task) => <div key={task.id}>{task.name}</div>)}
+			{data &&
+				data.map((task) => (
+					<TaskCard key={task.id} taskData={task}>
+						{task.name}
+					</TaskCard>
+				))}
 		</Container>
 	);
 };
