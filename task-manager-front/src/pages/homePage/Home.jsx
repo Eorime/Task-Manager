@@ -20,11 +20,7 @@ const Home = () => {
 		<Container>
 			<Navigation />
 			{data &&
-				data.map((task) => (
-					<TaskCard key={task.id} taskData={task}>
-						{task.name}
-					</TaskCard>
-				))}
+				data.map((task) => <TaskCard key={task.id} taskData={task}></TaskCard>)}
 		</Container>
 	);
 };
