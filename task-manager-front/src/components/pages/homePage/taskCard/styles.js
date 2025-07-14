@@ -7,6 +7,7 @@ export const Container = styled.div`
 	padding: 18px 17px 30px 18px;
 	display: flex;
 	flex-direction: column;
+	border-radius: 5px;
 `;
 
 export const TopContainer = styled.div`
@@ -18,7 +19,9 @@ export const PriorityContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	border: 1px solid grey;
 	padding: 7px 11px;
+	border-radius: 4px;
 `;
 
 export const PriorityLabel = styled.span`
@@ -47,3 +50,25 @@ export const TaskDescription = styled.p`
 	font-size: 14px;
 	color: #747d85;
 `;
+
+export const TaskLine = styled.div`
+	height: 2px;
+	width: 100%;
+	background-color: #f6f6f6;
+`;
+
+export const BottomContainer = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+`;
+
+export const DateContainer = styled.div``;
+
+export const CalendarSvg = styled.svg``;
+
+export const DateLabel = styled.span``;
+
+export const AssignedEmployeesContainer = styled.div``;
+
+export const AssignedEmployee = styled.div``;
