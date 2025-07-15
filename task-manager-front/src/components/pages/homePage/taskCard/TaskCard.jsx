@@ -19,13 +19,13 @@ const TaskCard = ({ taskData }) => {
 		<Container>
 			<TopContainer>
 				<PriorityContainer>
-					<PriorityLabel></PriorityLabel>
+					<PriorityLabel>{taskData.priority_id}</PriorityLabel>
 				</PriorityContainer>
-				<StatusLabel></StatusLabel>
+				<StatusLabel>{taskData.status_id}</StatusLabel>
 			</TopContainer>
 			<TextContainer>
-				<TaskTitle></TaskTitle>
-				<TaskDescription></TaskDescription>
+				<TaskTitle>{taskData.title}</TaskTitle>
+				<TaskDescription>{taskData.description}</TaskDescription>
 			</TextContainer>
 			<TaskLine></TaskLine>
 		</Container>
