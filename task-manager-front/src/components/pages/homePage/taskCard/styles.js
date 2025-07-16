@@ -25,7 +25,7 @@ export const PriorityContainer = styled.div`
 `;
 
 export const PriorityLabel = styled.span`
-	font-weight: 500;
+	font-weight: bold;
 	font-size: 14px;
 `;
 

@@ -23,7 +23,7 @@ class Task
 
     public function getAllTasks()
     {
-        $query = "SELECT * FROM task";
+        $query = "SELECT * FROM task_view";
         $result = mysqli_query($this->conn, $query);
         $tasks = [];
         while ($row = mysqli_fetch_assoc($result)) {
@@ -34,7 +34,7 @@ class Task
 
     public function getTaskById($id)
     {
-        $query = "SELECT * FROM task WHERE id = ?";
+        $query = "SELECT * FROM task_view WHERE id = ?";
         $stmt = mysqli_prepare($this->conn, $query);
         mysqli_stmt_bind_param($stmt, "i", $id);
         mysqli_stmt_execute($stmt);
