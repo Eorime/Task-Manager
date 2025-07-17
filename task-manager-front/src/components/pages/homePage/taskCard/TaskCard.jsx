@@ -15,6 +15,27 @@ import {
 } from "./styles";
 
 const TaskCard = ({ taskData }) => {
+	const priorityColors = [
+		{
+			label: "low",
+			color: "#73D5A0",
+			fill: "#C9F6DC",
+			stroke: "#B0EDCC",
+		},
+		{
+			label: "medium",
+			color: "#E6B157",
+			fill: "#FBE7CA",
+			stroke: "#F9D697",
+		},
+		{
+			label: "high",
+			color: "#D35462",
+			fill: "#FEC7CB",
+			stroke: "#FFB7BD",
+		},
+	];
+
 	return (
 		<Container>
 			<TopContainer>
