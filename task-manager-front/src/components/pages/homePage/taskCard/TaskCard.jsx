@@ -17,30 +17,36 @@ import {
 const TaskCard = ({ taskData }) => {
 	const priorityColors = [
 		{
-			label: "low",
+			label: "Low",
 			color: "#73D5A0",
 			fill: "#C9F6DC",
 			stroke: "#B0EDCC",
 		},
 		{
-			label: "medium",
+			label: "Medium",
 			color: "#E6B157",
 			fill: "#FBE7CA",
 			stroke: "#F9D697",
 		},
 		{
-			label: "high",
+			label: "High",
 			color: "#D35462",
 			fill: "#FEC7CB",
 			stroke: "#FFB7BD",
 		},
 	];
 
+	const currentPriority = priorityColors.find(
+		(priority) => priority.label === taskData.priority_name
+	);
+
 	return (
 		<Container>
 			<TopContainer>
-				<PriorityContainer>
-					<PriorityLabel>{taskData.priority_name}</PriorityLabel>
+				<PriorityContainer {...currentPriority}>
+					<PriorityLabel {...currentPriority}>
+						{taskData.priority_name}
+					</PriorityLabel>
 				</PriorityContainer>
 				<StatusLabel>{taskData.status_name}</StatusLabel>
 			</TopContainer>
@@ -49,6 +55,7 @@ const TaskCard = ({ taskData }) => {
 				<TaskDescription>{taskData.description}</TaskDescription>
 			</TextContainer>
 			<TaskLine></TaskLine>
+			<BottomContainer></BottomContainer>
 		</Container>
 	);
 };

@@ -20,19 +20,22 @@ export const PriorityContainer = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid grey;
+	border: 1px solid gray;
+	border-color: ${(props) => props.stroke || "gray"};
 	padding: 7px 11px;
 	border-radius: 4px;
+	background-color: ${(props) => props.fill || "gray"};
 `;
 
 export const PriorityLabel = styled.span`
 	font-weight: bold;
 	font-size: 14px;
+	color: ${(props) => props.color || "gray"};
 `;
 
 export const StatusLabel = styled.span`
 	font-size: 14px;
-	color: #434951;
+	color: ${(props) => props.color || "gray"};
 	font-weight: bold;
 `;
 
