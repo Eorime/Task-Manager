@@ -45,7 +45,7 @@ const TaskCard = ({ taskData }) => {
 			<TopContainer>
 				<PriorityContainer {...currentPriority}>
 					<PriorityLabel {...currentPriority}>
-						{taskData.priority_name}
+						{taskData.priority_name.toUpperCase()}
 					</PriorityLabel>
 				</PriorityContainer>
 				<StatusLabel>{taskData.status_name}</StatusLabel>

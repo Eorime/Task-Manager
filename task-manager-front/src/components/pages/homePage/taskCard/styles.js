@@ -40,8 +40,10 @@ export const StatusLabel = styled.span`
 `;
 
 export const TextContainer = styled.div`
+	margin: 24px 0;
 	display: flex;
 	flex-direction: column;
+	gap: 1rem;
 `;
 
 export const TaskTitle = styled.span`
@@ -53,6 +55,13 @@ export const TaskTitle = styled.span`
 export const TaskDescription = styled.p`
 	font-size: 14px;
 	color: #747d85;
+	display: -webkit-box;
+	-webkit-line-clamp: 3; /* Number of lines to show */
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 0;
+	line-height: 1.5;
 `;
 
 export const TaskLine = styled.div`
