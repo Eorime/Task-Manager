@@ -56,7 +56,7 @@ export const TaskDescription = styled.p`
 	font-size: 14px;
 	color: #747d85;
 	display: -webkit-box;
-	-webkit-line-clamp: 3; /* Number of lines to show */
+	-webkit-line-clamp: 3;
 	-webkit-box-orient: vertical;
 	overflow: hidden;
 	text-overflow: ellipsis;

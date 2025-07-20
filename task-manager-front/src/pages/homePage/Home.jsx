@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Navigation from "../../components/common/navigation/Navigation";
-import { Container } from "./styles";
+import { Container, TasksContainer } from "./styles";
 import TaskCard from "../../components/pages/homePage/taskCard/TaskCard";
 
 const Home = () => {
@@ -19,8 +19,12 @@ const Home = () => {
 	return (
 		<Container>
 			<Navigation />
-			{data &&
-				data.map((task) => <TaskCard key={task.id} taskData={task}></TaskCard>)}
+			<TasksContainer>
+				{data &&
+					data.map((task) => (
+						<TaskCard key={task.id} taskData={task}></TaskCard>
+					))}
+			</TasksContainer>
 		</Container>
 	);
 };
