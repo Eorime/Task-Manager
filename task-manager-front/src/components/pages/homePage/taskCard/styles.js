@@ -8,6 +8,12 @@ export const Container = styled.div`
 	display: flex;
 	flex-direction: column;
 	border-radius: 5px;
+	cursor: pointer;
+	transition: all 0.3s ease-in-out;
+
+	&:hover {
+		box-shadow: 4px 4px 4px #747d85;
+	}
 `;
 
 export const TopContainer = styled.div`
